@@ -1,0 +1,11 @@
+div.card {
+  margin: 20px;
+}
+
+img.card-img-top {
+  height: 147.5px;
+}
+
+div.card-body {
+  background-color: bisque;
+}

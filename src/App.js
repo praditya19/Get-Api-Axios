@@ -1,25 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Home from './Counter/Home';
+import Axios from 'axios';
 import './App.css';
-
 class App extends Component {
+  state = {
+    posts: []
+  };
+
+  getDataFromApi = () => {
+    Axios.get('http://167.160.188.135/api/book')
+      .then(res => {  
+        this.setState({
+          posts: res.data.data
+        });
+        console.log(this.state.posts, 'ini Embernya');
+      })
+      .catch(a => {
+        console.log(a);
+      });
+  };
+
+  componentDidMount() {
+    this.getDataFromApi();
+  }
   render() {
+    const { posts } = this.state;
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Home posts={posts} />
       </div>
     );
   }
